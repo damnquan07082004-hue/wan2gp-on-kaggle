@@ -17,17 +17,21 @@ Run the notebook top to bottom to clone Wan2GP, install all system and Python de
 3. Download or update Wan2GP - clones the upstream repository into `/kaggle/working/Wan2GP` or pulls the latest changes when it already exists, then links Wan2GP's checkpoint and output folders into the selected data root.
 4. Install system dependencies - installs video and audio libraries required by Wan2GP.
 5. Install Python dependencies - pins PyTorch + CUDA wheels and installs Wan2GP requirements.
-6. Launch Wan2GP - starts the Gradio UI; keep the cell running while you interact with Wan2GP.
+6. Install optional GGUF CUDA kernels - adds Wan2GP's optional llama.cpp GGUF CUDA acceleration when the Kaggle runtime matches a published wheel.
+7. Launch Wan2GP - starts the Gradio UI; keep the cell running while you interact with Wan2GP.
 
 ## Requirements
 
-* Kaggle account with notebook GPU access.
+* Kaggle account with notebook GPU access and phone verification completed.
 * Internet enabled in the Kaggle notebook settings.
 * Stable internet connection while the setup cells run, because the notebook downloads the Wan2GP repository, Python packages, and model weights.
+* T4 GPU selected when available. P100 can be used as a fallback, but T4 is usually better for Wan2GP inference because it has Tensor Cores and stronger modern PyTorch inference support.
 
 ## Tips
 
 * Kaggle notebook session storage is temporary. Files in `/kaggle/working` are included in notebook output when you save a version, but active session state can be lost when the session stops.
+* Choose **GPU T4** first when Kaggle offers multiple GPU types. Use **GPU P100** only if T4 is unavailable.
+* GGUF models can run with the base Wan2GP requirements. The optional GGUF CUDA kernel cell improves performance only when Kaggle's Python, PyTorch, and CUDA versions match one of Wan2GP's published kernel wheels.
 * Keep the final cell running to maintain the public Gradio link; stopping it will terminate the interface.
 * If Kaggle changes its base image or GPU availability, restart the session and rerun the notebook from the top.
 
