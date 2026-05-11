@@ -18,7 +18,8 @@ Run the notebook top to bottom to clone Wan2GP, install all system and Python de
 4. Install system dependencies - installs video and audio libraries required by Wan2GP.
 5. Install Python dependencies - pins PyTorch + CUDA wheels and installs Wan2GP requirements.
 6. Install optional GGUF CUDA kernels - adds Wan2GP's optional llama.cpp GGUF CUDA acceleration when the Kaggle runtime matches a published wheel.
-7. Launch Wan2GP - starts the Gradio UI; keep the cell running while you interact with Wan2GP.
+7. Force a headless matplotlib backend - switches Wan2GP's preprocessing tools to a notebook-friendly backend.
+8. Launch Wan2GP - starts the Gradio UI; keep the cell running while you interact with Wan2GP.
 
 ## Requirements
 
