@@ -13,10 +13,10 @@ Run the notebook top to bottom to clone Wan2GP, install all system and Python de
 ## Notebook workflow
 
 1. Confirm the accelerator - prompts you to enable a GPU accelerator before continuing.
-2. Configure the workspace path and data storage - Wan2GP runs from `/kaggle/working/Wan2GP`, with checkpoints, LoRAs, outputs, and model caches stored under `/kaggle/working/Wan2GP-data`.
-3. Download or update Wan2GP - clones the upstream repository into `/kaggle/working/Wan2GP` or pulls the latest changes when it already exists, then links Wan2GP's checkpoint and output folders into the selected data root.
+2. Configure the workspace path and data storage - Wan2GP runs from `/kaggle/working/Wan2GP`; large checkpoints, LoRAs, and model caches are stored under `/kaggle/temp/Wan2GP-data`; generated outputs are stored under `/kaggle/working/Wan2GP-outputs`.
+3. Download or update Wan2GP - clones the upstream repository into `/kaggle/working/Wan2GP` or pulls the latest changes when it already exists, then links Wan2GP's checkpoint, LoRA, and output folders into the selected Kaggle storage locations.
 4. Install system dependencies - installs video and audio libraries required by Wan2GP.
-5. Install Python dependencies - pins PyTorch + CUDA wheels and installs Wan2GP requirements.
+5. Install Python dependencies - installs a pinned Wan2GP runtime stack: PyTorch 2.7.1 + CUDA 12.8, torchvision 0.22.1, torchaudio 2.7.1, xformers 0.0.31, and Wan2GP requirements.
 6. Install optional GGUF CUDA kernels - adds Wan2GP's optional llama.cpp GGUF CUDA acceleration when the Kaggle runtime matches a published wheel.
 7. Force a headless matplotlib backend - switches Wan2GP's preprocessing tools to a notebook-friendly backend.
 8. Launch Wan2GP - starts the Gradio UI; keep the cell running while you interact with Wan2GP.
@@ -30,9 +30,10 @@ Run the notebook top to bottom to clone Wan2GP, install all system and Python de
 
 ## Tips
 
-* Kaggle notebook session storage is temporary. Files in `/kaggle/working` are included in notebook output when you save a version, but active session state can be lost when the session stops.
+* Kaggle's `/kaggle/working` directory is the notebook output area and can fill up before the full session disk is full. This notebook keeps large model files in `/kaggle/temp` to avoid exhausting the output quota, while keeping generated files in `/kaggle/working/Wan2GP-outputs`.
 * Choose **GPU T4** first when Kaggle offers multiple GPU types. Use **GPU P100** only if T4 is unavailable.
 * GGUF models can run with the base Wan2GP requirements. The optional GGUF CUDA kernel cell improves performance only when Kaggle's Python, PyTorch, and CUDA versions match one of Wan2GP's published kernel wheels.
+* Step 5 reinstalls the pinned PyTorch/xformers stack by default. This is slower than using Kaggle's preinstalled packages, but it is more stable across Kaggle base image changes and keeps Wan2GP's lower-VRAM xformers attention mode available. Set `INSTALL_STABLE_TORCH_STACK = False` only if you intentionally want to try Kaggle's preinstalled Torch stack.
 * Keep the final cell running to maintain the public Gradio link; stopping it will terminate the interface.
 * If Kaggle changes its base image or GPU availability, restart the session and rerun the notebook from the top.
 
