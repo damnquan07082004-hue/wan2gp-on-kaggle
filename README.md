@@ -1,0 +1,36 @@
+# Wan2GP on Kaggle
+
+[![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://kaggle.com/kernels/welcome?src=https://github.com/Square-Zero-Labs/Wan2GP-on-Kaggle/blob/main/wan2gp-kaggle.ipynb)
+
+## Overview
+
+This repository provides a single Kaggle notebook that automates setting up the [Wan2GP](https://github.com/deepbeepmeep/Wan2GP) AI video generation platform in a fresh GPU-backed Kaggle notebook session.
+
+Warning: Kaggle commonly assigns 16 GB GPUs such as T4 or P100, which is too small for most Wan2GP checkpoints. Start with the `Wan 2.2 TextImage2Video 5B FastWan` model and use 480p to reduce the chance of memory errors.
+
+Run the notebook top to bottom to clone Wan2GP, install all system and Python dependencies, and launch the Gradio interface from Kaggle.
+
+## Notebook workflow
+
+1. Confirm the accelerator - prompts you to enable a GPU accelerator before continuing.
+2. Configure the workspace path and data storage - Wan2GP runs from `/kaggle/working/Wan2GP`, with checkpoints, LoRAs, outputs, and model caches stored under `/kaggle/working/Wan2GP-data`.
+3. Download or update Wan2GP - clones the upstream repository into `/kaggle/working/Wan2GP` or pulls the latest changes when it already exists, then links Wan2GP's checkpoint and output folders into the selected data root.
+4. Install system dependencies - installs video and audio libraries required by Wan2GP.
+5. Install Python dependencies - pins PyTorch + CUDA wheels and installs Wan2GP requirements.
+6. Launch Wan2GP - starts the Gradio UI; keep the cell running while you interact with Wan2GP.
+
+## Requirements
+
+* Kaggle account with notebook GPU access.
+* Internet enabled in the Kaggle notebook settings.
+* Stable internet connection while the setup cells run, because the notebook downloads the Wan2GP repository, Python packages, and model weights.
+
+## Tips
+
+* Kaggle notebook session storage is temporary. Files in `/kaggle/working` are included in notebook output when you save a version, but active session state can be lost when the session stops.
+* Keep the final cell running to maintain the public Gradio link; stopping it will terminate the interface.
+* If Kaggle changes its base image or GPU availability, restart the session and rerun the notebook from the top.
+
+## Contributing
+
+Issues and pull requests are welcome. If you notice changes in Kaggle runtimes or Wan2GP dependencies, please open a PR so the notebook stays up to date.
