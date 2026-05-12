@@ -18,7 +18,6 @@ Kaggle's 16 GB GPUs are tight for Wan2GP. Start with `Wan 2.2 TextImage2Video 5B
 * Stores large checkpoints, LoRAs, and model caches in `/kaggle/temp/Wan2GP-data` to avoid filling Kaggle's smaller output quota.
 * Stores generated files in `/kaggle/working/Wan2GP-outputs` so they can be saved with the notebook output.
 * Installs system packages, PyTorch, xformers, and Wan2GP requirements directly in the Kaggle notebook environment.
-* Optionally installs Wan2GP's GGUF CUDA kernels when the runtime matches a published wheel.
 * Launches Wan2GP through a public Gradio link.
 
 Keep the final launch cell running while using the UI. Stopping that cell stops Wan2GP.
@@ -26,6 +25,7 @@ Keep the final launch cell running while using the UI. Stopping that cell stops 
 ## Notes
 
 * The PyTorch/xformers install is intentionally slower than using Kaggle's preinstalled packages so Wan2GP can use lower-VRAM xformers attention.
+* Dependency installs use `--no-cache-dir`, and model/runtime caches are pointed at `/kaggle/temp` to reduce disk pressure.
 * If GPU options are grayed out, check Kaggle phone verification and GPU quota.
 * If Kaggle changes its base image or GPU availability, restart the session and rerun the notebook from the top.
 
