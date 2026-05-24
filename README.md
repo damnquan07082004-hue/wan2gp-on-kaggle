@@ -4,6 +4,12 @@
 
 Kaggle notebook for running [Wan2GP](https://github.com/deepbeepmeep/Wan2GP) with a GPU-backed session.
 
+## Tutorial
+
+[![Watch the Wan2GP on Kaggle tutorial](https://img.youtube.com/vi/7jboiN00aRk/hqdefault.jpg)](https://youtu.be/7jboiN00aRk)
+
+[Watch the notebook tutorial on YouTube](https://youtu.be/7jboiN00aRk)
+
 ## Before You Run
 
 * Complete Kaggle phone verification.
